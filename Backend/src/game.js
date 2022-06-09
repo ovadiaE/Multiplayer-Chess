@@ -37,7 +37,7 @@ const addPlayer = ({gameID, name, playerID}) => {
     }
 }
 
-const removePLayer = (playerID) => {
+const removePlayer = (playerID) => {
     for (const game in games) {
         let players = games[game]
         const index = players.findIndex((p1) => p1.playerID ===playerID)
@@ -53,5 +53,5 @@ const game = (id) => games[id];
 module.exports = {
     addPlayer, 
     game,
-    removePLayer
+    removePlayer
 }
