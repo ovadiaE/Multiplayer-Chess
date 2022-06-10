@@ -10,10 +10,10 @@ class Player {
 }
 
 const addPlayer = ({gameID, name, playerID}) => {
-    if (!games[gamesID]) {
+    if (!games[gameID]) {
         const color = Math.random() <= 0.5 ? 'w' : 'b';
         const player = new Player(name, color, playerID, gameID);
-        games[gamesID] = [player];
+        games[gameID] = [player];
         return {
             message: 'joined successfully',
             opponent: null,
@@ -26,7 +26,7 @@ const addPlayer = ({gameID, name, playerID}) => {
     }
 
     const opponent = games[gameID][0];
-    const color = opponent.color === 'w' ? 'b' : 'w';
+    const color = opponent?.color === 'w' ? 'b' : 'w';
     const player = new Player(name, color, playerID, gameID);
     games[gameID].push(player);
 
