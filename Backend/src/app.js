@@ -9,12 +9,9 @@ app.use(cors());
 
 const port = 8000
 
-
-
 const io = socketio(server, {
     cors: {
         origin: '*',
-  
     }
   });
 
@@ -52,8 +49,6 @@ io.on('connection', (socket) => {
     });
 
     socket.on('move', ({ sourceSquare, targetSquare, gameID }) => {
-        const moveInfo = {sourceSquare, targetSquare, gameID} 
-        console.log(moveInfo)
         socket.broadcast.to(gameID).emit('opponentMove', { sourceSquare, targetSquare });
     });
 

@@ -1,11 +1,11 @@
 import React from "react"
-import ChessGame from "./chess/ChessGame.js";
+import HomePage from './components/HomePage.js'
 import './App.css'
 
 function App() {
   return (
     <div className="App">
-      <ChessGame/>
+      <HomePage/>
     </div>
   );
 }

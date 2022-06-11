@@ -1,43 +1,57 @@
 import React, {useState, useRef, useEffect} from 'react'
+import {useLocation, useNavigate} from 'react-router-dom'
+import qs from 'query-string';
 import Chessboard from 'chessboardjsx';
 import { Chess } from 'chess.js'
 import './ChessGame.css'
 import io from "socket.io-client"; 
-import { createCacheExpression } from '@vue/compiler-core';
 
 const socket = io('http://localhost:8000');
-
 
 function ChessGame () {
     const [fen, setFen] = useState('start')
     
+    const navigate = useNavigate()
+    const location = useLocation()
+   
+    const playerName = useRef()
+    const gameID = useRef()
+    let playerColor = useRef(null)
+    
     let game = useRef(null)
     
+    const joinedGame = () => {
+        socket.emit('join', { name: playerName.current, gameID: gameID.current},
+            ({ error, color }) => {
+                if (error) {
+                    console.log(error)
+                    navigate(`/`, { replace: true })
+                }
+                playerColor.current = color
+                console.log(playerColor.current)
+        });
+       socket.on('welcome', ({ message, opponent }) => {
+            console.log({ message, opponent });
+        });
+    }
     useEffect (() => {
         game.current = new Chess()
+        joinedGame()
     },[])
 
-    useEffect(() => {
-        socket.emit('join', { name: 'Frank', gameID: '20' }, ({ error, color }) => {
-            console.log({ color });
-        });
-        socket.on('welcome', ({ message, opponent }) => {
-            console.log({ message, opponent });
-        });
-        socket.on('opponentJoin', ({ message, opponent }) => {
-            console.log({ message, opponent });
-        });
+    useEffect(()=> {
+        const {id, name} = qs.parse(location.search)
+        playerName.current = name
+        gameID.current = id
+    }, [location.search])
 
+    useEffect(() => {
         socket.on('opponentMove', ({ sourceSquare, targetSquare }) => {
             let move = game.current.move({
                 from: sourceSquare,
                 to: targetSquare
             })            
             setFen(game.current.fen())
-            console.log(fen)
-           });
-           socket.on('message', ({ message }) => {
-               console.log({ message });
            });
     }, [game])
         
@@ -48,10 +62,14 @@ function ChessGame () {
         })
         
         if (move === null) return null;
+        if(game.current.turn() !== playerColor.current){
+            console.log('illegal move please wait your turn')
+            return
+        }
         
         setFen(game.current.fen())
         
-        socket.emit('move', { gameID: '20', sourceSquare, targetSquare });
+        socket.emit('move', { gameID:gameID.current, sourceSquare, targetSquare });
     }
     
     const reset = () => {
@@ -61,15 +79,15 @@ function ChessGame () {
     }
      
     return ( 
-         <>
-         { game.current && game.current.game_over() ? 
+    <>
+        {game.current && game.current.game_over() ? 
             <div className="game-over">
                 <h1> Game Over</h1>
                 <button onClick={reset}>Play Again</button>
             </div> : null }
             
-            <Chessboard position={fen} onDrop={makeMove}/>
-        </>
+        <Chessboard position={fen} onDrop={makeMove} showNotation={true}/>
+    </>
      )
 
 };

@@ -1,7 +1,7 @@
 const games = {};
 
 class Player {
-    constructor(name, color, playerID, gameID){
+    constructor (name, color, playerID, gameID){
         this.name = name;
         this.color = color;
         this.playerID = playerID;
