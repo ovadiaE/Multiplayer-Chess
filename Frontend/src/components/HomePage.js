@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate, useLocation } from "react-router-dom";
 import qs from 'query-string'
 import './HomePage-style.css'
+import InviteButton from './InviteButton';
 
 const HomePage = () => {
     const [name, setName] = useState('')
@@ -42,6 +43,8 @@ const HomePage = () => {
                 <p className="invite">Invite Your Friends</p>
                 <button type="submit">Submit  biitch</button>
             </form>
+            <InviteButton/>
+
         </div>
     )
 };

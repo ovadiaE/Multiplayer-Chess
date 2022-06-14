@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import ChessGame from './chess/ChessGame';
+import Display from './components/Display'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -11,7 +11,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App/>}/>
-        <Route path="game" element={<ChessGame/>}/>
+        <Route path="game" element={<Display/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
