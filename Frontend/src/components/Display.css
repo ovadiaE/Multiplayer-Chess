@@ -1,0 +1,14 @@
+.wrapper{
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #252934;
+    width: 90vw;
+}
+
+.chat-wrapper{
+    border: 1px solid red;
+    height: 60vh;
+    width: 40vw;
+}

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate, useLocation } from "react-router-dom";
 import qs from 'query-string'
-import './HomePage-style.css'
+import './HomePage.css'
 import InviteButton from './InviteButton';
 
 const HomePage = () => {
@@ -24,12 +24,12 @@ const HomePage = () => {
         if(!(name && gameID)){
             return;
         }
-        navigate(`/game?name=${name}&id=${gameID}`, { replace: true })
+        navigate(`/display?name=${name}&id=${gameID}`, { replace: true })
     };
 
     return (
-        <div>
-            <h2> Play Chess with your friends online</h2>
+        <div className='form-wrapper'>
+            <h2> Play Chess online</h2>
             <form onSubmit={handleSubmit}>
                 <input 
                     type="text"
@@ -39,11 +39,12 @@ const HomePage = () => {
                     placeholder="Display Name">
                 </input>
                 <div className="gameId">Game ID: {gameID}</div>
-                <hr/>
-                <p className="invite">Invite Your Friends</p>
-                <button type="submit">Submit  biitch</button>
+                <button className="submit-button" type="submit">Create Room</button>
             </form>
-            <InviteButton/>
+            <p className="invite">Invite Your Friends</p>
+            <hr/>
+
+            {gameID ? <InviteButton id={gameID}/> : null }
 
         </div>
     )

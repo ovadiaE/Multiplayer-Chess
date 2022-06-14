@@ -17,7 +17,6 @@ function ChessGame () {
     const playerName = useRef()
     const gameID = useRef()
     let playerColor = useRef(null)
-    
     let game = useRef(null)
     
     const joinedGame = () => {
@@ -77,7 +76,7 @@ function ChessGame () {
         game.current.reset();
         setFen('start')
     }
-     
+    
     return ( 
     <>
         {game.current && game.current.game_over() ? 

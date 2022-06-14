@@ -1,37 +1,33 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from "react"
+import './InviteButton.css'
 
 const InviteButton = ({id}) => {
     const [isCopied, setIsCopied] = useState(false)
 
     async function copyToClipboard (id) {
-        if ('clipboard' in navigator) {
-            return await navigator.clipboard.writeText(`http://localhost:3000/game?id=${id}`)
-        } 
-        else {
-            return document.execCommand('copy', true, id)
+        if('clipboard' in navigator){
+            setIsCopied(true)
+            return await navigator.clipboard.writeText(`http://localhost:3000/display?id=${id}`)
+        } else {
+            return document.execCommand('copy', true, `http://localhost:3000/display?id=${id}`);
         }
     }
 
-    const handleCopyClick = async () => {
-        try {
-            let copy = await copyToClipboard(id)
-            if(copy) {
-                window.alert("Copied Ivite")
-                setIsCopied(true)
-            }
-            setTimeout(() => {
+    useEffect(() => {
+        if(isCopied){
+            setTimeout( ()=> {
                 setIsCopied(false)
-            }, 1500)
-        } catch (error){
-            console.log(error)
+            }, 1000)
         }
-    }
+    },[isCopied])
+
     return (
-            <button onClick={handleCopyClick}>
-                Copy            
+            <button className="share" onClick={ () => {copyToClipboard(id)}}>
+                <span>{isCopied ? 'Copied!' : 'Copy'}</span>
             </button>
-        
+       
     )
+
 }
 
 export default InviteButton
