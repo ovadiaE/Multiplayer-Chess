@@ -4,11 +4,8 @@ import qs from 'query-string';
 import Chessboard from 'chessboardjsx';
 import { Chess } from 'chess.js'
 import './ChessGame.css'
-import io from "socket.io-client"; 
 
-const socket = io('http://localhost:8000');
-
-function ChessGame () {
+function ChessGame ({socket}) {
     const [fen, setFen] = useState('start')
     
     const navigate = useNavigate()
@@ -23,7 +20,6 @@ function ChessGame () {
         socket.emit('join', { name: playerName.current, gameID: gameID.current},
             ({ error, color }) => {
                 if (error) {
-                    console.log(error)
                     navigate(`/`, { replace: true })
                 }
                 playerColor.current = color
