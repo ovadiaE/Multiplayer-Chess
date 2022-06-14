@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate, useLocation } from "react-router-dom";
 import qs from 'query-string'
 import './HomePage.css'
-import InviteButton from './InviteButton';
+import InviteButton from '../InviteButton/InviteButton.js';
 
 const HomePage = () => {
     const [name, setName] = useState('')
