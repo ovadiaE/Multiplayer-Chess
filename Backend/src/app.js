@@ -12,6 +12,7 @@ const port = 8000
 const io = socketio(server, {
     cors: {
         origin: '*',
+        methods: ['GET', 'POST']
     }
   });
 
@@ -25,6 +26,7 @@ io.on('connection', (socket) => {
         if (error) {
             return callback({ error });
         }
+        
         socket.join(gameID);
         callback({ color: player.color });
 
@@ -62,9 +64,28 @@ io.on('connection', (socket) => {
             socket.broadcast.to(player.game).emit('opponentLeft');
         }
     });
+    
+    // socket logic for handling calls
+
+    // socket.on('me', socket.id);
+   
+    socket.on('disconnectcall', () => {
+        socket.broadcast.emit('callended')
+    })
+
+    socket.on('calluser', ({userToCall, signalData, from, name}) => {
+        io.to(userToCall).emit('calluser', {signal: signalData, from, name})
+    })
+
+    socket.on('answercall', (data) => {
+        io.to(data.to).emit('callaccepted', data.signal)
+    })
 });
 
+app.get("/", (req, res) => {
+    res.send("server is running")
+})
 
 server.listen(port, ()=>{
-    console.log('Server started at port: '+ port);
+    console.log('Server started at port: ' + port);
 });

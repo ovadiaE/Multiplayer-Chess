@@ -32,7 +32,7 @@ function ChessGame ({socket}) {
     useEffect (() => {
         game.current = new Chess()
         joinedGame()
-    },[])
+    },[]) //eslint-disable-line
 
     useEffect(()=> {
         const {id, name} = qs.parse(location.search)
@@ -80,7 +80,6 @@ function ChessGame ({socket}) {
                 <h1> Game Over</h1>
                 <button onClick={reset}>Play Again</button>
             </div> : null }
-            
         <Chessboard position={fen} onDrop={makeMove} showNotation={true}/>
     </>
      )
