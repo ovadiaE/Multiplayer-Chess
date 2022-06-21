@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from "react"
 import './InviteButton.css'
 
-const InviteButton = ({id}) => {
+const InviteButton = ({me, roomID}) => {
     const [isCopied, setIsCopied] = useState(false)
 
-    async function copyToClipboard (id) {
+    async function copyToClipboard (roomID) {
         if('clipboard' in navigator){
             setIsCopied(true)
-            return await navigator.clipboard.writeText(`http://localhost:3000/display?id=${id}`)
+            return await navigator.clipboard.writeText(`Let's play chess at http://localhost:3000/display?id=${roomID},
+            My call ID ${me}`)
         } else {
-            return document.execCommand('copy', true, `http://localhost:3000/display?id=${id}`);
+            return document.execCommand('copy', true, `Let's play chess at http://localhost:3000/display?id=${roomID},
+            My call ID ${me}`);
         }
     }
 
@@ -22,8 +24,8 @@ const InviteButton = ({id}) => {
     },[isCopied])
 
     return (
-            <button className="share" onClick={ () => {copyToClipboard(id)}}>
-                <span>{isCopied ? 'Copied!' : 'Copy'}</span>
+            <button className="share" onClick={ () => {copyToClipboard(roomID)}}>
+                <span>{isCopied ? 'Copied!' : 'Copy Invite'}</span>
             </button>
        
     )

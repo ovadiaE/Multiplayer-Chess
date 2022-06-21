@@ -1,8 +1,8 @@
 import React from 'react'
 import ChessGame from '../chess/ChessGame'
-import VideoChat from '../VideoChat/VideoChat'
 import './Display.css'
 import io from "socket.io-client"; 
+import Call from '../VideoChat/Call'
 
 const Display = () => {
     
@@ -15,9 +15,8 @@ const Display = () => {
                 <ChessGame socket={socket}/>
             </div>
             
-              <VideoChat socket={socket}/>
-          
-
+            <Call socket={socket}/>
+        
         </div>
   
      

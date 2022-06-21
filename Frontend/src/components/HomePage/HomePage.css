@@ -1,15 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif&family=Oxygen&display=swap');
 
 .form-wrapper{
-    background-color: #C4C8D3;
     display: flex;
     flex-direction: column;
     width: 35%;
     align-items: center;
     background-color: #252934;
-    -moz-box-shadow:    3px 3px 5px 6px rgb(237, 63, 138);;
-    -webkit-box-shadow: 3px 3px 5px 6px rgb(237, 63, 138);;
-    box-shadow:         3px 3px 5px 6px rgb(237, 63, 138);;
+    -moz-box-shadow:    3px 3px 5px 6px rgb(237, 63, 138);
+    -webkit-box-shadow: 3px 3px 5px 6px rgb(237, 63, 138);
+    box-shadow:         3px 3px 5px 6px rgb(237, 63, 138);
+    height: 40%;
+    justify-content: space-around;
 }
 h2 {
     color: white;
@@ -43,23 +44,6 @@ form {
 
 .input:focus{
   border: 1.5px solid rgb(237, 63, 138);
-}
-
-.gameId {
-    background-color: #eaeaea;
-    color: rgb(42, 29, 131);
-    border-radius: 48px;
-    padding: 1.2rem 2rem;
-    margin: 24px 0;
-    font-size: 18px;
-    transition: all .3s;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-}
-
-.gameId:hover{
-    color: rgb(237, 63, 138);
-    fill: rgb(237, 63, 138);
 }
 
 .submit-button {

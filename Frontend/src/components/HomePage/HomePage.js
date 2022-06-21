@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate, useLocation } from "react-router-dom";
 import qs from 'query-string'
 import './HomePage.css'
-import InviteButton from '../InviteButton/InviteButton.js';
 
 const HomePage = () => {
     const [name, setName] = useState('')
@@ -38,14 +37,8 @@ const HomePage = () => {
                     onChange={({target}) => setName(target.value)}
                     placeholder="Display Name">
                 </input>
-                <div className="gameId">Game ID: {gameID}</div>
                 <button className="submit-button" type="submit">Create Room</button>
             </form>
-            <p className="invite">Invite Your Friends</p>
-            <hr/>
-
-            {gameID ? <InviteButton id={gameID}/> : null }
-
         </div>
     )
 };

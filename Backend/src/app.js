@@ -17,6 +17,7 @@ const io = socketio(server, {
   });
 
 io.on('connection', (socket) => {
+    
     socket.on('join', ({ name, gameID }, callback) => {
         const { error, player, opponent } = addPlayer({
             name,
@@ -67,19 +68,20 @@ io.on('connection', (socket) => {
     
     // socket logic for handling calls
 
-    // socket.on('me', socket.id);
-   
-    socket.on('disconnectcall', () => {
-        socket.broadcast.emit('callended')
-    })
+    socket.emit("me", socket.id)
 
-    socket.on('calluser', ({userToCall, signalData, from, name}) => {
-        io.to(userToCall).emit('calluser', {signal: signalData, from, name})
-    })
+	socket.on("disconnect", () => {
+		socket.broadcast.emit("callEnded")
+	})
 
-    socket.on('answercall', (data) => {
-        io.to(data.to).emit('callaccepted', data.signal)
-    })
+	socket.on("callUser", (data) => {
+		io.to(data.userToCall).emit("callUser", { signal: data.signalData, from: data.from, name: data.name })
+	})
+
+	socket.on("answerCall", (data) => {
+		io.to(data.to).emit("callAccepted", data.signal)
+	})
+
 });
 
 app.get("/", (req, res) => {

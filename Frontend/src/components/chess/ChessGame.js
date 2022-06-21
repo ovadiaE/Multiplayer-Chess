@@ -80,7 +80,9 @@ function ChessGame ({socket}) {
                 <h1> Game Over</h1>
                 <button onClick={reset}>Play Again</button>
             </div> : null }
-        <Chessboard position={fen} onDrop={makeMove} showNotation={true}/>
+            <div className='game-wrapper'>
+                <Chessboard position={fen} onDrop={makeMove} showNotation={true}/>
+            </div>
     </>
      )
 
