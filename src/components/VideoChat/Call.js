@@ -9,24 +9,23 @@ import InviteButton from '../InviteButton/InviteButton';
 
 const Call = ({socket}) => {
 	const [roomID, setRoomID] = useState('')
-	const [ me, setMe ] = useState("")
+	const [me, setMe] = useState("")
 	const [friendId, setFriendId] = useState('')
-	const [ stream, setStream ] = useState()
-	const [ receivingCall, setReceivingCall ] = useState(false)
-	const [ caller, setCaller ] = useState("")
-	const [ callerSignal, setCallerSignal ] = useState()
-	const [ callAccepted, setCallAccepted ] = useState(false)
-	const [ idToCall, setIdToCall ] = useState("")
-	const [ callEnded, setCallEnded] = useState(false)
-	const [ name, setName ] = useState("")
+	const [stream, setStream] = useState()
+	const [receivingCall, setReceivingCall] = useState(false)
+	const [caller, setCaller] = useState("")
+	const [callerSignal, setCallerSignal] = useState()
+	const [callAccepted, setCallAccepted ] = useState(false)
+	const [idToCall, setIdToCall] = useState("")
+	const [callEnded, setCallEnded] = useState(false)
+	const [name, setName] = useState("")
 	
 	const myVideo = useRef()
 	const userVideo = useRef()
-	const connectionRef= useRef()
+	const connectionRef = useRef()
 	const gameID = useRef()
 	const myId = useRef()
-
-
+	
 	const location = useLocation()
 
 	useEffect(() => {
