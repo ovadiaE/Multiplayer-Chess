@@ -14,6 +14,7 @@ const addPlayer = ({gameID, name, playerID}) => {
         const color = Math.random() <= 0.5 ? 'w' : 'b';
         const player = new Player(name, color, playerID, gameID);
         games[gameID] = [player];
+
         return {
             message: 'joined successfully',
             opponent: null,
@@ -53,5 +54,5 @@ const game = (id) => games[id];
 module.exports = {
     addPlayer, 
     game,
-    removePlayer
+    removePlayer, 
 }

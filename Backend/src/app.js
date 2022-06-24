@@ -17,7 +17,6 @@ const io = socketio(server, {
   });
 
 io.on('connection', (socket) => {
-    
     socket.on('join', ({ name, gameID }, callback) => {
         const { error, player, opponent } = addPlayer({
             name,
@@ -36,7 +35,6 @@ io.on('connection', (socket) => {
             message: `Hello ${player.name}, Welcome to the game`,
             opponent,
         });
-
         // Tell player2 that player1 has joined the game.
         socket.broadcast.to(player.gameID).emit('opponentJoin', {
             message: `${player.name} has joined the game. `,
@@ -69,6 +67,12 @@ io.on('connection', (socket) => {
     // socket logic for handling calls
 
     socket.emit("me", socket.id)
+
+    socket.on('shareId', ({id, gameID}) => {
+        if (game(gameID).length > 1) {
+            socket.broadcast.to(gameID).emit('displayId', {id});
+        }
+    })
 
 	socket.on("disconnect", () => {
 		socket.broadcast.emit("callEnded")

@@ -7,6 +7,7 @@ import './ChessGame.css'
 
 function ChessGame ({socket}) {
     const [fen, setFen] = useState('start')
+    const [color, setColor] = useState('')
     
     const navigate = useNavigate()
     const location = useLocation()
@@ -23,10 +24,11 @@ function ChessGame ({socket}) {
                     navigate(`/`, { replace: true })
                 }
                 playerColor.current = color
-                console.log(playerColor.current)
+                setColor(color)
+                console.log(color)
         });
        socket.on('welcome', ({ message, opponent }) => {
-            console.log({ message, opponent });
+            // console.log({ message, opponent });
         });
     }
     useEffect (() => {
@@ -47,8 +49,9 @@ function ChessGame ({socket}) {
                 to: targetSquare
             })            
             setFen(game.current.fen())
+            console.log(move)
            });
-    }, [game])
+    }, [game]) // eslint-disable-line
         
     const makeMove = ({sourceSquare, targetSquare}) => {
         let move = game.current.move({
@@ -57,6 +60,7 @@ function ChessGame ({socket}) {
         })
         
         if (move === null) return null;
+        
         if(game.current.turn() !== playerColor.current){
             console.log('illegal move please wait your turn')
             return
@@ -81,7 +85,7 @@ function ChessGame ({socket}) {
                 <button onClick={reset}>Play Again</button>
             </div> : null }
             <div className='game-wrapper'>
-                <Chessboard position={fen} onDrop={makeMove} showNotation={true}/>
+                {color === 'b' ? <Chessboard position={fen} onDrop={makeMove} showNotation={true} orientation={'white'}/> : <Chessboard position={fen} onDrop={makeMove} showNotation={true} orientation={'black'}/>}
             </div>
     </>
      )

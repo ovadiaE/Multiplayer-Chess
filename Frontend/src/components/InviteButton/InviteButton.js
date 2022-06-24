@@ -5,13 +5,11 @@ const InviteButton = ({me, roomID}) => {
     const [isCopied, setIsCopied] = useState(false)
 
     async function copyToClipboard (roomID) {
-        if('clipboard' in navigator){
+        if ('clipboard' in navigator){
             setIsCopied(true)
-            return await navigator.clipboard.writeText(`Let's play chess at http://localhost:3000/display?id=${roomID},
-            My call ID ${me}`)
+            return await navigator.clipboard.writeText(`Let's play chess at http://localhost:3000/display?id=${roomID}`)
         } else {
-            return document.execCommand('copy', true, `Let's play chess at http://localhost:3000/display?id=${roomID},
-            My call ID ${me}`);
+            return document.execCommand('copy', true, `Let's play chess at http://localhost:3000/display?id=${roomID}`);
         }
     }
 
@@ -27,7 +25,6 @@ const InviteButton = ({me, roomID}) => {
             <button className="share" onClick={ () => {copyToClipboard(roomID)}}>
                 <span>{isCopied ? 'Copied!' : 'Copy Invite'}</span>
             </button>
-       
     )
 
 }
