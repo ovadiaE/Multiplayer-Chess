@@ -5,9 +5,12 @@ const { addPlayer, game, removePlayer } = require('./src/game');
 const cors = require("cors");
 const app = express()
 const server = http.createServer(app)
+const dotenv = require('dotenv');
 app.use(cors());
 
-const port = 8000
+dotenv.config({path: './config/config.env'});
+
+const port = process.env.PORT || 8000
 
 const io = socketio(server, {
     cors: {
@@ -88,9 +91,9 @@ io.on('connection', (socket) => {
 
 });
 
-app.get("/", (req, res) => {
-    res.send("server is running")
-})
+app.get('/', cors(), (req, res) => {
+    res.send({response:"Eureka"}).status(200)
+});
 
 server.listen(port, ()=>{
     console.log('Server started at port: ' + port);
