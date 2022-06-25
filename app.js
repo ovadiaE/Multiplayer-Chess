@@ -24,7 +24,7 @@ io.on('connection', (socket) => {
             gameID,
         });
         if (error) {
-            return callback({ error });
+            return  callback({ error });
         }
         
         socket.join(gameID);
