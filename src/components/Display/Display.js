@@ -6,7 +6,7 @@ import Call from '../VideoChat/Call'
 
 const Display = () => {
     
-    const socket = io('http://localhost:8000');
+    const socket = io('https://multiplayer-chess-beta.herokuapp.com/');
     
     return (
         <div className="wrapper"> 
