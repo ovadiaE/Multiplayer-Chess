@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
   },
   "keywords": [],
   "author": "",
@@ -14,10 +17,13 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.1",
+    "server": "^1.0.37",
     "socket.io": "^4.5.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
   },
-  "engines": { "node" : "6.13.1" }
+  "engines": {
+    "node": "6.13.1"
+  }
 }
