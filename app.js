@@ -14,7 +14,8 @@ const port = process.env.PORT || 8000
 
 const io = socketio(server, {
     cors: {
-        origin: 'https://splendorous-pony-c35963.netlify.app/',
+        origin: '*',
+        methods: ['GET', 'POST']
     }
   });
 
