@@ -14,7 +14,7 @@ const port = process.env.PORT || 8000
 
 const io = socketio(server, {
     cors: {
-        origin: '*',
+        origin: 'https://symphonious-khapse-bd6e43.netlify.app',
         methods: ['GET', 'POST']
     }
   });
