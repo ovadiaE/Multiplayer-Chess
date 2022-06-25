@@ -7,9 +7,9 @@ const InviteButton = ({me, roomID}) => {
     async function copyToClipboard (roomID) {
         if ('clipboard' in navigator){
             setIsCopied(true)
-            return await navigator.clipboard.writeText(`Let's play chess at http://localhost:3000/display?id=${roomID}`)
+            return await navigator.clipboard.writeText(`Let's play chess at https://symphonious-khapse-bd6e43.netlify.app/?id=${roomID}`)
         } else {
-            return document.execCommand('copy', true, `Let's play chess at http://localhost:3000/display?id=${roomID}`);
+            return document.execCommand('copy', true, `Let's play chess at https://symphonious-khapse-bd6e43.netlify.app/display?id=${roomID}`);
         }
     }
 
